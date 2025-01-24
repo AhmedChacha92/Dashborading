@@ -1,0 +1,24 @@
+{% extends 'missions/base.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<h1>Dashboard</h1>
+<p>Total Budget: {{ total_budget }}</p>
+<div class="row">
+    <div class="col-md-6">
+        <h2>Missions</h2>
+        <ul class="list-group">
+            {% for mission in missions %}
+                <li class="list-group-item">
+                    <strong>{{ mission.name }}</strong> - {{ mission.budget_per_day }} €/day
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="col-md-6">
+        <h2>Top Performers</h2>
+        <!-- contenu des performances -->
+    </div>
+</div>
+{% endblock %}

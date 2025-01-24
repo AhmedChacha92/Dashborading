@@ -1,0 +1,15 @@
+{% extends 'missions/base.html' %}
+
+{% block title %}Mes Missions{% endblock %}
+
+{% block content %}
+<h1>Mes Missions</h1>
+<ul class="list-group">
+    {% for mission in missions %}
+        <li class="list-group-item">
+            <strong>{{ mission.name }}</strong> - {{ mission.status }}
+            <a href="{% url 'mission_detail' mission.id %}" class="btn btn-primary btn-sm float-right">Détails</a>
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}

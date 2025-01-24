@@ -1,0 +1,33 @@
+{% extends 'missions/base.html' %}
+
+{% block title %}Liste des Missions{% endblock %}
+
+{% block content %}
+<h1>Liste des Missions</h1>
+<a href="{% url 'create_mission' %}" class="btn btn-primary mb-3">Ajouter une Mission</a>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Type</th>
+            <th>Budget par jour</th>
+            <th>Date de fin</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for mission in missions %}
+        <tr>
+            <td><a href="{% url 'mission_detail' mission.id %}">{{ mission.name }}</a></td>
+            <td>{{ mission.type }}</td>
+            <td>{{ mission.budget_per_day }} €</td>
+            <td>{{ mission.end_date }}</td>
+            <td>
+                <a href="{% url 'edit_mission' mission.id %}" class="btn btn-secondary btn-sm">Modifier</a>
+                <a href="{% url 'delete_mission' mission.id %}" class="btn btn-danger btn-sm">Supprimer</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

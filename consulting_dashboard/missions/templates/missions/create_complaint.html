@@ -1,0 +1,15 @@
+{% extends 'missions/base.html' %}
+
+{% block title %}Créer une Réclamation{% endblock %}
+
+{% block content %}
+<h1>Créer une Réclamation pour {{ mission.name }}</h1>
+<form method="post">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="description">Description</label>
+        <textarea class="form-control" id="description" name="description" rows="3"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Soumettre</button>
+</form>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'missions/base.html' %}
+
+{% block title %}Détails de la Mission{% endblock %}
+
+{% block content %}
+<h1>{{ mission.name }}</h1>
+<p>Type: {{ mission.type }}</p>
+<p>Budget par jour: {{ mission.budget_per_day }} €</p>
+<p>Date de fin: {{ mission.end_date }}</p>
+<p>Status: {{ mission.status }}</p>
+<h2>Utilisateurs assignés</h2>
+<ul class="list-group">
+    {% for user in mission.assigned_users.all %}
+        <li class="list-group-item">{{ user.username }}</li>
+    {% endfor %}
+</ul>
+<h2>Réclamations</h2>
+<ul class="list-group">
+    {% for complaint in mission.complaint_set.all %}
+        <li class="list-group-item">{{ complaint.description }} - {{ complaint.user.username }}</li>
+    {% endfor %}
+</ul>
+<a href="{% url 'create_complaint' mission.id %}" class="btn btn-danger">Déposer une réclamation</a>
+{% endblock %}
