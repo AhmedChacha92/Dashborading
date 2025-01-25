@@ -1,0 +1,18 @@
+{% extends 'missions/base.html' %}
+
+{% block title %}Attribuer des Missions{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+    <div class="form-container">
+        <h1 class="text-center">Attribuer des Missions</h1>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary">Attribuer</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

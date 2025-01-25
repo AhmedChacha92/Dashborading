@@ -13,4 +13,7 @@ urlpatterns = [
     path('missions/<int:mission_id>/delete/', views.delete_mission, name='delete_mission'),
     path('register/', views.register, name='register'),
     path('login/', views.login, name='login'),
+    path('password_reset/', views.password_reset, name='password_reset'),
+    path('consultants/create/', views.create_consultant, name='create_consultant'),
+    path('consultants/assign_missions/', views.assign_missions, name='assign_missions'),
 ]
