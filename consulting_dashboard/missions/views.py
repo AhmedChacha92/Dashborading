@@ -50,7 +50,7 @@ def create_mission(request):
         form = MissionForm(request.POST)
         if form.is_valid():
             mission = form.save()
-            if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+            if request.is_ajax():
                 return JsonResponse({
                     'success': True,
                     'mission': {
@@ -63,7 +63,7 @@ def create_mission(request):
                 })
             return redirect('dashboard')
         else:
-            if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+            if request.is_ajax():
                 return JsonResponse({'success': False, 'errors': form.errors})
     else:
         form = MissionForm()
@@ -135,28 +135,6 @@ def password_reset(request):
     else:
         form = PasswordResetForm()
     return render(request, 'registration/password_reset.html', {'form': form})
-
-def create_consultant(request):
-    if request.method == 'POST':
-        form = ConsultantCreationForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('dashboard')
-    else:
-        form = ConsultantCreationForm()
-    return render(request, 'consultants/create_consultant.html', {'form': form})
-
-def assign_missions(request):
-    if request.method == 'POST':
-        form = AssignMissionForm(request.POST)
-        if form.is_valid():
-            consultant = form.cleaned_data['consultant']
-            missions = form.cleaned_data['missions']
-            consultant.missions.set(missions)
-            return redirect('dashboard')
-    else:
-        form = AssignMissionForm()
-    return render(request, 'consultants/assign_missions.html', {'form': form})
 
 
 def home(request):
