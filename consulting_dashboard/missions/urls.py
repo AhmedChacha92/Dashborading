@@ -16,4 +16,5 @@ urlpatterns = [
     path('password_reset/', views.password_reset, name='password_reset'),
     path('consultants/create/', views.create_consultant, name='create_consultant'),
     path('consultants/assign_missions/', views.assign_missions, name='assign_missions'),
+
 ]

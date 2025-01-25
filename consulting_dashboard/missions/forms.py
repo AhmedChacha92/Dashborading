@@ -2,6 +2,9 @@ from django import forms
 from .models import Mission, Complaint, Consultant
 
 class MissionForm(forms.ModelForm):
+    end_date = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}))
+    type = forms.ChoiceField(choices=Mission.TYPE_CHOICES)
+    
     class Meta:
         model = Mission
         fields = ['name', 'type', 'end_date', 'budget_per_day', 'solo']

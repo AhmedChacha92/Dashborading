@@ -66,6 +66,13 @@ class Consultant(AbstractBaseUser, PermissionsMixin):
         return self.is_admin
 
 class Mission(models.Model):
+    
+    TYPE_CHOICES = [
+        ('web_mobile', 'Développement Web/Mobile'),
+        ('consulting', 'Consulting Informatique'),
+        ('telephonie', 'Téléphonie'),
+        ('reseau', 'Administration Réseau'),
+    ]
     name = models.CharField(max_length=100)
     type = models.CharField(max_length=100)
     end_date = models.DateField()

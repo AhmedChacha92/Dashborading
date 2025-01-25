@@ -49,22 +49,9 @@ def create_mission(request):
     if request.method == 'POST':
         form = MissionForm(request.POST)
         if form.is_valid():
-            mission = form.save()
-            if request.is_ajax():
-                return JsonResponse({
-                    'success': True,
-                    'mission': {
-                        'id': mission.id,
-                        'name': mission.name,
-                        'type': mission.type,
-                        'budget_per_day': str(mission.budget_per_day),
-                        'end_date': mission.end_date.strftime('%Y-%m-%d'),
-                    }
-                })
-            return redirect('dashboard')
-        else:
-            if request.is_ajax():
-                return JsonResponse({'success': False, 'errors': form.errors})
+            form.save()
+            # Afficher le formulaire après la soumission réussie
+            return render(request, 'missions/create_mission.html', {'form': form, 'success': True})
     else:
         form = MissionForm()
     return render(request, 'missions/create_mission.html', {'form': form})
@@ -136,6 +123,27 @@ def password_reset(request):
         form = PasswordResetForm()
     return render(request, 'registration/password_reset.html', {'form': form})
 
+def create_consultant(request):
+    if request.method == 'POST':
+        form = ConsultantCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('dashboard')
+    else:
+        form = ConsultantCreationForm()
+    return render(request, 'Consultants/create_consultant.html', {'form': form})
+
+def assign_missions(request):
+    if request.method == 'POST':
+        form = AssignMissionForm(request.POST)
+        if form.is_valid():
+            consultant = form.cleaned_data['consultant']
+            missions = form.cleaned_data['missions']
+            consultant.missions.add(*missions)
+            return redirect('dashboard')
+    else:
+        form = AssignMissionForm()
+    return render(request, 'Consultants/assign_missions.html', {'form': form})
 
 def home(request):
     return render(request, 'missions/base.html')
